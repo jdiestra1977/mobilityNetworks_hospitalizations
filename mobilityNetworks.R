@@ -79,3 +79,30 @@ bind_rows(network_metrics(graph_zip,norms[1]) %>% mutate(Normal=norms[1],Week=fe
          network_metrics(graph_zip,norms[4]) %>% mutate(Normal=norms[4],Week=fecha_week),
          network_metrics(graph_zip,norms[5]) %>% mutate(Normal=norms[5],Week=fecha_week))
 
+# Data from TACC
+
+library(tidyverse)
+
+setwd("~/Documents/GitHub/mobilityNetworks_hospitalizations/Data_from_TACC/")
+
+load("node_stats_TX.RData")
+net_stats<-read_csv("network_stats_TX.csv")
+net_stats$Normal %>% unique() #"totalVisits"  "weight_inv"   "weight_range" "weight_sum"   "weight_max"  
+net_stats %>%
+#  mutate(propor_SCC=size_SCC/Nodes,propor_WCC=size_WCC/Nodes) %>%
+  select(-contains("size"),-Nodes,-diameter) %>%
+  pivot_longer(cols = -c("Normal","Week")) %>%
+  filter(Normal == "weight_max") %>%
+  ggplot(aes(x=Week,y=value)) +
+  geom_line() + geom_point() + 
+  facet_wrap(~name,scales = "free_y")
+
+net_stats %>% group_by(Normal) %>% slice_max(degree_assortativity)
+net_stats %>% group_by(Normal) %>% slice_max(clustering_global)
+net_stats %>% group_by(Normal) %>% slice_max(mean_dist)
+net_stats %>% group_by(Normal) %>% slice_min(density)
+
+
+
+
+  

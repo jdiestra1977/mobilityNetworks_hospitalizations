@@ -41,7 +41,7 @@ diff_normalized_weights<-function(graph){
   epsilon<-1e-6
   E(graph)$weight_range <- (E(graph)$totalVisits - min(E(graph)$totalVisits)) / 
     (max(E(graph)$totalVisits) - min(E(graph)$totalVisits))
-  E(graph)$weight_range[E(graph)$weight_range == 0] <- epsilon
+  E(graph)$weight_range[E(graph)$weight_range <= 0] <- epsilon
   # Normalize weights to sum to 1
   E(graph)$weight_sum <- E(graph)$totalVisits / sum(E(graph)$totalVisits)
   # Normalize weights by the maximum value
