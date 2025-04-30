@@ -24,6 +24,11 @@ I would need a similar list for hospitalizations in Texas. For each week between
 
 ## First test
 
-I want to evaluate if there is a relationship between the position of the node (ZCTA) in the network, and the number of hospitalizations.
+I want to evaluate if there is a correlation between the position of the node (ZCTA) in the network, and epidemiological variables of interest.
 Knowing that mobility in week *t* may influence hospitalizations in week *t+l*, I will evaluate different *l* values to find the optimal
-*l* value. 
+*l* value. Epidemiological variables of interest include:
+
+- **Total number of hospitalizations in season**. Total number of individuals hospitalized in each ZCTA at the end of the season.
+- **Time of peak**. Number of weeks from the begginnig of the season when the prevalence curve reaches its maximum value.
+- **Magnitud of peak**. Number of hospitalized individulals at the peak of the prevalence curve.
+- **Onset of season**. Number of weeks from the begginning of the season when prevalence curves reach a pre-defined threshold *p*.
